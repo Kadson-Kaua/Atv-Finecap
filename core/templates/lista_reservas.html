@@ -1,0 +1,32 @@
+{%  extends 'base.html' %}
+
+{% block main %}
+<br>
+<br>
+    <h3 style="margin-right: 20px;"> Lista de Reservas</h3>
+
+  <a href="{% url 'reserva' %}" class="btn btn-success mb-3">Novo Cadastro</a>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Empresa</th>
+        <th>Stand</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for reserva in reservas %}  
+      <tr>
+        <td>{{ reserva.nome_empresa }}</td>
+        <td>{{ reserva.stand }}</td>
+        <td style="display: flex; justify-content: space-evenly;">
+          <a href="{% url 'reserva_detalhe' reserva.id %}" class="btn btn-primary btn-sm">Detalhe</a>
+          <a href="{% url 'remover_reserva' reserva.id %}" class="btn btn-danger btn-sm">Remover</a>
+        </td>
+      </tr>
+      {% endfor %}
+    
+    </tbody>
+  </table>
+{%  endblock %}
