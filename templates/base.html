@@ -496,12 +496,13 @@ button{
         <div class="fk">
         <nav class="nt">
                 <ul>
-                    <li><a href="{% url 'listar_reserva' %}">Reservas</a></li>
+                    <li><a href="{% url 'lista_reservas' %}">Reservas</a></li>
                     <li><a href="">Stands</a></li>
                 </ul>
         </nav>
-        <button id="btn-reservar"><a href="{% url 'reserva' %}">Reservar Stand</a></button>
+        <button style="border-radius: 60%;" id="btn-reservar"><a href="{% url 'reserva' %}">Reservar Stand</a></button>
         </div>
+
     </header>
 
     {% block main %}
