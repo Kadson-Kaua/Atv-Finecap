@@ -16,15 +16,15 @@
       </tr>
     </thead>
     <tbody>
-      {% for reserva in reservas %}  
+      {% for object in object_list %}  
       <tr>
-        <td>{{ reserva.nome_empresa }}</td>
-        <td>{{ reserva.stand }}</td>
+        <td>{{ object.nome_empresa }}</td>
+        <td>{{ object.stand }}</td>
         <td style="display: flex; justify-content: space-evenly;">
           <div class="btn-group btn-group-toggle" data-toggle="buttons"></div>
-          <a href="{% url 'editar' reserva.id %}" class="btn btn-info btn-sm">Editar</a>
-          <a href="{% url 'reserva_detalhe' reserva.id %}" class="btn btn-primary btn-sm">Detalhe</a>
-          <a href="{% url 'remover_reserva' reserva.id %}" class="btn btn-danger btn-sm">Remover</a>
+          <a href="{% url 'editar' object.id %}" class="btn btn-info btn-sm">Editar</a>
+          <a href="{% url 'reserva_detalhe' object.id %}" class="btn btn-primary btn-sm">Detalhe</a>
+          <a href="{% url 'remover_reserva' object.id %}" class="btn btn-danger btn-sm">Remover</a>
         </div>
         </td>
         

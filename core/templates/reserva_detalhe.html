@@ -17,11 +17,11 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>{{ reserva.nome_empresa }}</td>
-                        <td>{{ reserva.cnpj }}</td>
-                        <td>{{ reserva.categoria_empresa }}</td>
-                        <td>{{ reserva.stand }}</td>
-                        {% if reserva.quitado %}
+                        <td>{{ object.nome_empresa }}</td>
+                        <td>{{ object.cnpj }}</td>
+                        <td>{{ object.categoria_empresa }}</td>
+                        <td>{{ object.stand }}</td>
+                        {% if object.quitado %}
                         <td>Quitado</td>
                         {% else %}
                         <td>Esperando Confirmação</td>
