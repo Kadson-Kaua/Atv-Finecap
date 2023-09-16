@@ -3,47 +3,45 @@ from .models import Reserva, Stand
 from .forms import ReservaForm
 from django.views import generic
 from django.urls import reverse_lazy
+from django.contrib import messages
 # Create your views here.
 
-#def criar_reserva(request):
-#    if request.method == "POST":
-#
-#        form = ReservaForm(request.POST, request.FILES)
-#        if form.is_valid():
-#           form.save()
-#           return redirect('listar_reserva')
-#    else: 
-#        form = ReservaForm()
-
-#    return render(request, 'reserva.html', {'form': form})
 
 class ReservaCreateView(generic.CreateView):
-  model = Reserva
-  form_class = ReservaForm
-  success_url = reverse_lazy("lista_reservas")
-  template_name = "reserva.html"
+    model = Reserva
+    form_class = ReservaForm
+    success_url = reverse_lazy("lista_reservas")
+    template_name = "reserva.html"
 
-#def listar_reserva(request):
-#    reservas = Reserva.objects.all() 
-#    context = {'reservas': reservas}
-#    return render(request, 'lista_reservas.html', context)
+    def form_valid(self, form):
+        messages.success(self.request, "Reserva cadastrada!!")
+        return super().form_valid(form)
+
+
 
 class ReservasListView(generic.ListView):
     model = Reserva
     template_name = "lista_reservas.html"
 
-
 class ReservaDeleteView(generic.DeleteView):
-  model = Reserva
-  success_url = reverse_lazy("lista_reservas")
+    model = Reserva
+    success_url = reverse_lazy("lista_reservas")
+
+    def form_valid(self, form):
+        messages.warning(self.request, "Reserva cancelada!")
+        return super().form_valid(form)
 
 class ReservaUpdateView(generic.UpdateView):
-  model = Reserva
-  form_class = ReservaForm
-  success_url = reverse_lazy("lista_reservas")
-  template_name = "reserva.html"
+    model = Reserva
+    form_class = ReservaForm
+    success_url = reverse_lazy("lista_reservas")
+    template_name = "reserva.html"
+
+    def form_valid(self, form):
+        messages.success(self.request, "Atualizado com sucesso!!")
+        return super().form_valid(form)
 
 
 class ReservaDetailView(generic.DetailView):
     model = Reserva
-    template_name = "reserva_detalhe.html"
+    template_name = "reserva_detalhe.html"  

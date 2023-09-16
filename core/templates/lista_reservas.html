@@ -1,36 +1,46 @@
-{%  extends 'base.html' %}
+{% extends 'base.html' %}
 
 {% block main %}
 <br>
 <br>
-    <h3 style="margin-right: 20px;"> Lista de Reservas</h3>
+<h3 style="margin-right: 20px;"> Lista de Reservas</h3>
 
-  <a href="{% url 'reserva' %}" class="btn btn-success mb-3">Novo Cadastro</a>
+<a href="{% url 'reserva' %}" class="btn btn-success mb-3">Novo Cadastro</a>
 
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th>Empresa</th>
-        <th>Stand</th>
-        <th>Ações</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for object in object_list %}  
-      <tr>
-        <td>{{ object.nome_empresa }}</td>
-        <td>{{ object.stand }}</td>
-        <td style="display: flex; justify-content: space-evenly;">
-          <div class="btn-group btn-group-toggle" data-toggle="buttons"></div>
-          <a href="{% url 'editar' object.id %}" class="btn btn-info btn-sm">Editar</a>
-          <a href="{% url 'reserva_detalhe' object.id %}" class="btn btn-primary btn-sm">Detalhe</a>
-          <a href="{% url 'remover_reserva' object.id %}" class="btn btn-danger btn-sm">Remover</a>
+{% if messages %}
+<div class="messages">
+  {% for message in messages %}
+  <div class="alert alert-{{ message.tags }}">
+    {{ message }}
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Empresa</th>
+      <th>Stand</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for object in object_list %}
+    <tr>
+      <td>{{ object.nome_empresa }}</td>
+      <td>{{ object.stand }}</td>
+      <td style="display: flex; justify-content: space-evenly;">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons"></div>
+        <a href="{% url 'editar' object.id %}" class="btn btn-info btn-sm">Editar</a>
+        <a href="{% url 'reserva_detalhe' object.id %}" class="btn btn-primary btn-sm">Detalhe</a>
+        <a href="{% url 'remover_reserva' object.id %}" class="btn btn-danger btn-sm">Remover</a>
         </div>
-        </td>
-        
-      </tr>
-      {% endfor %}
-    
-    </tbody>
-  </table>
-{%  endblock %}
+      </td>
+
+    </tr>
+    {% endfor %}
+
+  </tbody>
+</table>
+{% endblock %}
