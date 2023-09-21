@@ -28,9 +28,9 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
-MESSAGE_TAGS = {
-    messages.ERROR: 'danger',
-}
+#MESSAGE_TAGS = {
+#    messages.ERROR: 'danger',
+#}
 
 # Application definition
 

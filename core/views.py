@@ -4,6 +4,8 @@ from .forms import ReservaForm
 from django.views import generic
 from django.urls import reverse_lazy
 from django.contrib import messages
+from django.contrib.messages import views
+
 # Create your views here.
 
 
@@ -23,13 +25,14 @@ class ReservasListView(generic.ListView):
     model = Reserva
     template_name = "lista_reservas.html"
 
-class ReservaDeleteView(generic.DeleteView):
+class ReservaDeleteView(views.SuccessMessageMixin,generic.DeleteView):
     model = Reserva
     success_url = reverse_lazy("lista_reservas")
-
-    def form_valid(self, form):
-        messages.error(self.request, "Reserva cancelada!")
-        return super().form_valid(form)
+    success_message = "reserva cancelada com sucesso!!"
+    
+    #def form_valid(self, form):
+     #   messages.error(self.request, "Reserva cancelada!")
+     #   return super().form_valid(form)
 
 class ReservaUpdateView(generic.UpdateView):
     model = Reserva
