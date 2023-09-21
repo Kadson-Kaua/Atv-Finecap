@@ -28,7 +28,7 @@ class ReservaDeleteView(generic.DeleteView):
     success_url = reverse_lazy("lista_reservas")
 
     def form_valid(self, form):
-        messages.warning(self.request, "Reserva cancelada!")
+        messages.error(self.request, "Reserva cancelada!")
         return super().form_valid(form)
 
 class ReservaUpdateView(generic.UpdateView):
