@@ -24,6 +24,7 @@ class ReservaCreateView(generic.CreateView):
 class ReservasListView(generic.ListView):
     model = Reserva
     template_name = "lista_reservas.html"
+    paginate_by = 2
 
 class ReservaDeleteView(views.SuccessMessageMixin,generic.DeleteView):
     model = Reserva
