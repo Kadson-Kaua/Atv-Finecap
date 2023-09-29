@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<br>
+<br>
+<h3 style="margin-right: 20px; left: 5px;"> Lista de Reservas</h3>
+
+<a style="left: 5px;" href="{% url 'reservas:reserva' %}" class="btn btn-success mb-3">Novo Cadastro</a>
+
+{% if messages %}
+<div class="messages">
+  {% for message in messages %}
+  <div style="width: 30%; left: 5px;" class="alert alert-{{ message.tags }}">
+    {{ message }}
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Empresa</th>
+        <th>Stand</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for object in object_list %}
+      <tr>
+        <td>{{ object.nome_empresa }}</td>
+        <td>{{ object.stand }}</td>
+        <td style="display: flex; justify-content: space-evenly;">
+          <div class="btn-group btn-group-toggle" data-toggle="buttons"></div>
+          <a href="{% url 'reservas:editar' object.id %}" class="btn btn-info btn-sm">Editar</a>
+          <a href="{% url 'reservas:reserva_detalhe' object.id %}" class="btn btn-primary btn-sm">Detalhe</a>
+          <a href="{% url 'reservas:remover_reserva' object.id %}" class="btn btn-danger btn-sm">Remover</a>
+          </div>
+        </td>
+  
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+{% if page_obj.has_other_pages %}
+    <nav>
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page=1">
+                        First
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
+                        Previous
+                    </a>
+                </li>
+            {% endif %}
+
+            {% for page_number in page_obj.paginator.page_range %}
+                {% comment %}
+                    This conditional allows us to display up to 3 pages before and after the current page
+                    If you decide to remove this conditional, all the pages will be displayed
+
+                    You can change the 3 to any number you want e.g
+                    To display only 5 pagination items, change the 3 to 2 (2 before and 2 after the current page)
+                {% endcomment %}
+                {% if page_number <= page_obj.number|add:3 and page_number >= page_obj.number|add:-3 %}
+                    {% if page_obj.number == page_number %}
+                        <li class="page-item active">
+                            <a class="page-link" href="?page={{ page_number }}">
+                                {{ page_number }}
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_number }}">
+                                {{ page_number }}
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">
+                        Next
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">
+                        Last
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+{% endif %}
+{% endblock %}
