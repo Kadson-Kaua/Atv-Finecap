@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from core.views import ReservaCreateView, ReservasListView, ReservaDeleteView, ReservaDetailView, ReservaUpdateView
+from core.views import ReservaCreateView, ReservasListView, ReservaDeleteView, ReservaDetailView, ReservaUpdateView, StandCreateView, StandListView, StandUpdateView, StandDeleteView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -24,5 +24,13 @@ urlpatterns = [
     path('lista_reservas/', ReservasListView.as_view(), name='lista_reservas'),
     path('remover_reserva/<int:pk>/', ReservaDeleteView.as_view(), name="remover_reserva"),
     path('reserva_detalhe/<int:pk>/', ReservaDetailView.as_view(), name='reserva_detalhe'),
-    path('update/<int:pk>/', ReservaUpdateView.as_view(), name="editar")
+    path('update/<int:pk>/', ReservaUpdateView.as_view(), name="editar"),
+
+    # URL STANDS #
+
+    path('lista_stands/', StandListView.as_view(), name='lista_stands'),
+    path('criar_stand/', StandCreateView.as_view(), name="criar_stand"),
+    path('remover_stand/<int:pk>/', StandDeleteView.as_view(), name="remover_stand"),
+    path('update_stand/<int:pk>/', StandUpdateView.as_view(), name="editar_stand"),
+
 ]

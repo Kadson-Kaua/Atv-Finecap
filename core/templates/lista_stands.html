@@ -3,9 +3,9 @@
 {% block main %}
 <br>
 <br>
-<h3 style="margin-right: 20px; left: 5px;"> Lista de Reservas</h3>
+<h3 style="margin-right: 20px; left: 5px;"> Lista de Stands</h3>
 
-<a style="left: 5px;" href="{% url 'reserva' %}" class="btn btn-success mb-3">Novo Cadastro</a>
+<a style="left: 5px;" href="{% url 'criar_stand' %}" class="btn btn-success mb-3">Novo Cadastro</a>
 
 {% if messages %}
 <div class="messages">
@@ -20,21 +20,20 @@
   <table class="table table-bordered">
     <thead>
       <tr>
-        <th>Empresa</th>
-        <th>Stand</th>
+        <th>Localização</th>
+        <th>Valor</th>
         <th>Ações</th>
       </tr>
     </thead>
     <tbody>
       {% for object in object_list %}
       <tr>
-        <td>{{ object.nome_empresa }}</td>
-        <td>{{ object.stand }}</td>
+        <td>{{ object.localizacao }}</td>
+        <td>R$ {{ object.valor }}</td>
         <td style="display: flex; justify-content: space-evenly;">
           <div class="btn-group btn-group-toggle" data-toggle="buttons"></div>
-          <a href="{% url 'editar' object.id %}" class="btn btn-info btn-sm">Editar</a>
-          <a href="{% url 'reserva_detalhe' object.id %}" class="btn btn-primary btn-sm">Detalhe</a>
-          <a href="{% url 'remover_reserva' object.id %}" class="btn btn-danger btn-sm">Remover</a>
+          <a href="{% url 'editar_stand' object.id %}" class="btn btn-info btn-sm">Editar</a>
+          <a href="{% url 'remover_stand' object.id %}" class="btn btn-danger btn-sm">Remover</a>
           </div>
         </td>
   
