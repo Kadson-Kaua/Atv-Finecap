@@ -22,6 +22,7 @@ class ReservasListView(generic.ListView):
     template_name = "lista_reservas.html"
     paginate_by = 2
 
+
 class ReservaDeleteView(views.SuccessMessageMixin,generic.DeleteView):
     model = Reserva
     success_url = reverse_lazy("reservas:lista_reservas")
@@ -32,10 +33,6 @@ class ReservaUpdateView(generic.UpdateView):
     form_class = ReservaForm
     success_url = reverse_lazy("reservas:lista_reservas")
     template_name = "reserva.html"
-
-    def form_valid(self, form):
-        messages.success(self.request, "Atualizado com sucesso!!")
-        return super().form_valid(form)
 
 class ReservaDetailView(generic.DetailView):
     model = Reserva
