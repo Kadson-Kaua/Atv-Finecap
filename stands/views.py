@@ -16,6 +16,10 @@ class StandCreateView(LoginRequiredMixin, generic.CreateView):
     def form_valid(self, form):
         messages.success(self.request, "Stand cadastrada!!")
         return super().form_valid(form)
+    
+    def form_invalid(self, form):
+        print(form.errors)
+        return self.render_to_response(self.get_context_data(form=form))
 
 class StandListView(LoginRequiredMixin, generic.ListView):
     model = Stand

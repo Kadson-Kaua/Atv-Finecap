@@ -10,12 +10,17 @@ class StandForm(ModelForm):
 
     localizacao = forms.CharField(widget=forms.TextInput(attrs={
         'class': 'form-control'
-        }))
+    }))
     valor = forms.DecimalField(widget=forms.TextInput(attrs={
         'class': 'money form-control',
         'placeholder': 'Valor do stand'
-     }))
+    }), localize=True)
 
     def clean_valor(self):
         valor = self.cleaned_data["valor"]
-        return valor.replace(",", ".")
+        if isinstance(valor, str):
+            try:
+                valor = Decimal(valor.replace(",", ""))
+            except ValueError:
+                raise forms.ValidationError("Informe um número válido para o valor.")
+        return valor
