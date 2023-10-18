@@ -27,12 +27,14 @@
                         {{ form.stand }}
                     </div>
                     <div class="mb-3 form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                        <label class="form-check-label" for="{{ form.quitado.id_for_label }}">
-                            {{ form.quitado }}
-                            Quitado
-                        </label>
-                      </div>
+                        {% if is_editing %}
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                            <label class="form-check-label" for="{{ form.quitado.id_for_label }}">
+                                {{ form.quitado }}
+                                Quitado
+                            </label>
+                        {% endif %}
+                    </div>
           
                     
                     <button type="submit" class="btn btn-primary">Enviar</button>

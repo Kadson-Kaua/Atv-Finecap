@@ -6,8 +6,9 @@ from django.urls import reverse_lazy
 from django.contrib import messages
 from django.contrib.messages import views
 from django.contrib.auth.mixins import LoginRequiredMixin
+from users.permissions import GerentePermission
 
-class StandCreateView(LoginRequiredMixin, generic.CreateView):
+class StandCreateView(GerentePermission, LoginRequiredMixin, generic.CreateView):
     model = Stand
     form_class = StandForm
     success_url = reverse_lazy("stands:lista_stands")
@@ -26,7 +27,7 @@ class StandListView(LoginRequiredMixin, generic.ListView):
     template_name = "lista_stands.html"
     paginate_by = 2
 
-class StandUpdateView(LoginRequiredMixin, generic.UpdateView):
+class StandUpdateView(GerentePermission, LoginRequiredMixin, generic.UpdateView):
     model = Stand
     form_class = StandForm
     success_url = reverse_lazy("stands:lista_stands")
@@ -36,7 +37,7 @@ class StandUpdateView(LoginRequiredMixin, generic.UpdateView):
         messages.success(self.request, "Atualizado com sucesso!!")
         return super().form_valid(form)
 
-class StandDeleteView(LoginRequiredMixin, views.SuccessMessageMixin,generic.DeleteView):
+class StandDeleteView(GerentePermission, LoginRequiredMixin, views.SuccessMessageMixin,generic.DeleteView):
     model = Stand
     success_url = reverse_lazy("stands:lista_stands")
     success_message = "Stand removido com sucesso!!"
