@@ -1,6 +1,6 @@
 from django.db import models
 from stands.models import Stand
-# Create your models here.
+
 
 
 class Reserva(models.Model):

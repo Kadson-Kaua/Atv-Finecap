@@ -4,78 +4,59 @@
 {% load account socialaccount %}
 {% load static %}
 {% block css %}
-<link rel="stylesheet" href="{% static 'css/login.css' %}">
+<link rel="stylesheet" href="{% static 'css/signup.css' %}">
 {% endblock %}
 
 {% block head_title %}{% trans "Signup" %}{% endblock head_title %}
 
 {% block main %}
 
-<div class="main-content pl-sm-3 mt-4 d-flex justify-content-center align-items-center">
-  <div class="col-md-5 col-lg-5 col-xl-5 col-12">
-    {% include "layouts/alerts.html" %}
-    <h1 class="text-h1 text-center">{% trans "Sign Up" %}</h1>
-    <form class="login" method="POST" action="{% url 'account_signup' %}">
-      {% csrf_token %}
-      <div class="form-group">
-        <label for="id_username">{% trans "Usuário:" %}</label>
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
-              <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
-            </svg><i class="fas fa-user" aria-hidden="true"></i></span>
-          </div>
-          <input type="text" name="username" class="form-control" id="id_username" placeholder="{% trans 'Username' %}">
-        </div>
-      </div>
-      <div class="form-group input-button">
-        <label for="id_email">{% trans "Email:" %}</label>
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-fill" viewBox="0 0 16 16">
-              <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z"/>
-            </svg><i class="fas fa-envelope" aria-hidden="true"></i></span>
-          </div>
-          <input type="email" name="email" class="form-control" id="id_email" placeholder="{% trans 'Email' %}">
-        </div>
-      </div>
-      <div class="form-group input-button">
-        <label for="id_password1">{% trans "Senha:" %}</label>
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock-fill" viewBox="0 0 16 16">
-              <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
-            </svg><i class="fas fa-lock" aria-hidden="true"></i></span>
-          </div>
-          <input id="show-password-button" type="password" name="password1" class="form-control" id="id_password1" placeholder="{% trans 'Password' %}">
-          <div class="input-group-append">
-          </div>
-        </div>
-       
-      </div>
-      <div class="form-group input-button">
-        <label for="id_password2">{% trans "Confirme sua senha:" %}</label>
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock-fill" viewBox="0 0 16 16">
-              <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
-            </svg><i class="fas fa-lock" aria-hidden="true"></i></span>
-          </div>
-          <input id="show-password-button" type="password" name="password2" class="form-control" id="id_password2" placeholder="{% trans 'Confirme sua senha' %}">
-        </div>
-      </div>
-      {% if redirect_field_value %}
-      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-      {% endif %}
-      <div class="form-group">
-        <button class="btn btn-primary btn-block" type="submit">{% trans "Sign Up" %}</button>
-      </div>
-    </form>
-    <hr>
-    <p class="first-access-href text-center">
-      <a style="text-decoration-line: none" href="{% url 'account_reset_password' %}">{% translate "First Access?" %}</a>
-    </p>
-  </div>
+<div class="signup-container">
+  {% include "layouts/alerts.html" %}
+    <div class="signup-form">
+        <h1>{% trans "Sign Up" %}</h1>
+        <form class="login" method="POST" action="{% url 'account_signup' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_username">{% trans "Usuário:" %}</label>
+                <input type="text" name="username" class="form-control" id="id_username" placeholder="{% trans 'Username' %}">
+            </div>
+            <div class="form-group">
+                <label for="id_email">{% trans "Email:" %}</label>
+                <input type="email" name="email" class="form-control" id="id_email" placeholder="{% trans 'Email' %}">
+            </div>
+            <div class="form-group">
+                <label for="id_password1">{% trans "Senha:" %}</label>
+                <div class="input-group">
+                    <input type="password" name="password1" class="form-control" id="id_password1"
+                        placeholder="{% trans 'Password' %}">
+                    <div class="input-group-append">
+                        <button class="show-password-btn" type="button" aria-label="Mostrar senha">
+                            <i class="fas fa-eye" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="id_password2">{% trans "Confirme sua senha:" %}</label>
+                <div class="input-group">
+                    <input type="password" name="password2" class="form-control" id="id_password2"
+                        placeholder="{% trans 'Confirme sua senha' %}">
+                    <div class="input-group-append">
+                        <button class="show-password-btn" type="button" aria-label="Mostrar senha">
+                            <i class="fas fa-eye" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {% if redirect_field_value %}
+            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+            {% endif %}
+            <div class="form-group">
+                <button class="btn btn-signup" type="submit">{% trans "Sign Up" %}</button>
+            </div>
+        </form>
+        <hr>
+    </div>
 </div>
-
 {% endblock %}

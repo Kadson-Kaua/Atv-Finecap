@@ -1,8 +1,6 @@
 {% extends "base.html" %}
 
-{% load i18n %}
-{% load account socialaccount %}
-{% load static %}
+{% load i18n %} {% load account socialaccount %} {% load static %}
 
 {% block css %}
 <link rel="stylesheet" href="{% static 'css/login.css' %}">
@@ -11,58 +9,40 @@
 {% block head_title %}{% translate "Sign In" %}{% endblock %}
 
 {% block main %}
-
-<div class="main-content pl-sm-3 mt-4 d-flex justify-content-center align-items-center">
-  <div class="col-md-5 col-lg-5 col-xl-5 col-12">
-    <h1 class="text-h1 text-center">Faça seu Login</h1>
-    <form class="login" method="POST" action="{% url 'account_login' %}">
-      {% csrf_token %}
-      <div class="form-group">
-        <label for="id_login">{% translate "Username:" %}</label>
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text"><i class="fas fa-user" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-                <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"/>
-              </svg></i></span>
-          </div>
-          <input type="text" name="login" class="form-control" placeholder="Digite seu nome de usuário">
+<div class="login-container">
+    <form class="login-form" method="POST" action="{% url 'account_login' %}">
+        {% csrf_token %}
+        <h1>{% translate "Faça seu Login" %}</h1>
+        <div class="form-group">
+            <label for="id_login">{% translate "Username:" %}</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-user" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"/>
+                  </svg></i></span>
+              </div>
+            <input type="text" name="login" class="form-control" placeholder="Digite seu nome de usuário">
         </div>
-      </div>
-      <div class="form-group input-button">
-        <label for="id_password">{% translate "Senha:" %}</label>
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock" viewBox="0 0 16 16">
-                <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zM5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/>
-              </svg><i class="fas fa-lock" aria-hidden="true"></i></span>
-          </div>
-          <input type="password" name="password" class="form-control" placeholder="Digite sua senha de segurança">
-          <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="button" aria-label="Mostrar senha">
-              <i class="fas fa-eye" aria-hidden="true"></i>
-            </button>
-          </div>
+        <div class="form-group">
+            <label for="id_password">{% translate "Senha:" %}</label>
+            <div class="input-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock" viewBox="0 0 16 16">
+                      <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zM5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/>
+                    </svg><i class="fas fa-lock" aria-hidden="true"></i></span>
+                </div>
+                <input type="password" name="password" class="form-control" placeholder="Digite sua senha de segurança">
+            </div>
         </div>
-      </div>
-      {% if redirect_field_value %}
-      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-      {% endif %}
-      <div class="form-group">
-        <div class="form-check">
-          <input class="form-check-input" id="keep_connected_checkbox" name="keep_connected_checkbox"
-            type="checkbox" aria-label="Manter-me conectado" />
-          <label class="form-check-label" for="keep_connected_checkbox">
-            {% translate "Manter-me conectado" %}
-          </label>
+        {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+        {% endif %}
+        <div  style="margin-top: 15px;" class="form-group form-check">
+            <input class="form-check-input" id="keep_connected_checkbox" name="keep_connected_checkbox" type="checkbox" aria-label="Manter-me conectado" />
+            <label class="form-check-label" for="keep_connected_checkbox">{% translate "Manter-me conectado" %}</label>
         </div>
-      </div>
-      <button class="btn btn-primary btn-block" type="submit">{% translate "Sign In" %}</button>
+        <button class="btn btn-primary btn-block" type="submit">{% translate "Sign In" %}</button>
     </form>
-    <hr>
-    <p class="first-access-href text-center">
-      <a style="text-decoration-line: none" href="{% url 'account_reset_password' %}">{% translate "Primeiro Acesso?" %}</a>
-    </p>
-  </div>
 </div>
-
 {% endblock %}
