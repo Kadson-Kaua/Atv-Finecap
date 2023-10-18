@@ -12,7 +12,15 @@ class HomeView(LoginRequiredMixin, generic.TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['num_reservas'] = Reserva.objects.count()
+        
+        # Filtra as reservas do usuário logado
+        user_reservas = Reserva.objects.filter(user=self.request.user)
+        context['num_reservas'] = user_reservas.count()
+        
+        # Conta o número total de stands
         context['num_stands'] = Stand.objects.count()
+        
         return context
+
+
 

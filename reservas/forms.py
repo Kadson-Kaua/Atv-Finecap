@@ -7,6 +7,7 @@ class ReservaForm(ModelForm):
 
     class Meta:
         model = Reserva
+        exclude = ['user']
         fields = '__all__'
         widgets = {
             'cnpj' : forms.TextInput(attrs={'class': 'form-control' }),

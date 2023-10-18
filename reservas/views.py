@@ -14,8 +14,13 @@ class ReservaCreateView(LoginRequiredMixin, generic.CreateView):
     template_name = "reserva.html"
 
     def form_valid(self, form):
+        form.instance.user = self.request.user  # Define o usuário atual como o proprietário da reserva
         messages.success(self.request, "Reserva cadastrada!!")
         return super().form_valid(form)
+
+    def form_invalid(self, form):
+        print(form.errors)
+        return self.render_to_response(self.get_context_data(form=form))
 
 
 class ReservasListView(LoginRequiredMixin, generic.ListView):
@@ -23,6 +28,9 @@ class ReservasListView(LoginRequiredMixin, generic.ListView):
     template_name = "lista_reservas.html"
     paginate_by = 2
 
+    def get_queryset(self):
+    # Retorna apenas as reservas do usuário logado
+        return Reserva.objects.filter(user=self.request.user)
 
 class ReservaDeleteView(LoginRequiredMixin, views.SuccessMessageMixin,generic.DeleteView):
     model = Reserva

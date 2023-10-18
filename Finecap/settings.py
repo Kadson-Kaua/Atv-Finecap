@@ -101,6 +101,7 @@ TEMPLATES = [
     },
 ]
 
+AUTH_USER_MODEL = 'users.CustomUser'
 WSGI_APPLICATION = "Finecap.wsgi.application"
 AUTH_USER_MODEL = "users.User"
 LOGIN_REDIRECT_URL = "core:home"
