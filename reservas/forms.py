@@ -3,6 +3,7 @@ from django import forms
 from .models import Reserva
 
 class ReservaForm(ModelForm):
+    quitado = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}))
 
     class Meta:
         model = Reserva
